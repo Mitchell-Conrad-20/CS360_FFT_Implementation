@@ -136,6 +136,9 @@ int fftCount(ComplexArray& a, int n, ComplexArray& y){
 
     // Calculations
     for(int k = 0; k < n / 2; k++){
+        // Count for For-Loop Check
+        count++;
+
         Complex omega = std::polar(1.0, -2.0 * PI * k / n);
 
         y[k] = y_even[k] + omega * y_odd[k];
