@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/FFT.cpp
+stdio.h
+-
+complex
+-
+valarray
+-
+iostream
+-
+

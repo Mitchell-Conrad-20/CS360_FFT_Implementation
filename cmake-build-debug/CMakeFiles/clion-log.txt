@@ -1,0 +1,4 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu-20.04 --exec /bin/bash -c "export PATH=\"$PATH:/usr/bin\" && export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd '/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/cmake-build-debug' && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -DCMAKE_C_COMPILER=/usr/bin/cc '-DCMAKE_CXX_COMPILER=/usr/bin/c++' -G 'CodeBlocks - Unix Makefiles' -S '/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation' -B '/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/cmake-build-debug'"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/cmake-build-debug
