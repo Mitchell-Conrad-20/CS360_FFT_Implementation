@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <complex>
 #include <valarray>
+#include <chrono>
 #include "Utilities.h"
 
 // Definitions
@@ -77,12 +78,14 @@ int main() {
     int n, i, j;
 
     // Define Counter to Store Average Counts for Each Run
-    double counter[MAX_RUNS][2];
+    double counter[MAX_RUNS][4];
 
     // Initialize Counters
     for(i=0; i<MAX_RUNS; i++){
         counter[i][0] = 0.0;
         counter[i][1] = 0.0;
+        counter[i][2] = 0.0;
+        counter[i][3] = 0.0;
     }
 
     // Set Starting Number of Elements
@@ -102,14 +105,30 @@ int main() {
 
             // Reset Count
             count = 0;
+
+            // Run FFT and Time the Process
+            auto beg = std::chrono::high_resolution_clock::now();
             counter[i][0] += (fftCount(data, n, out) / ((double)NUM_AVG));
+            auto end = std::chrono::high_resolution_clock::now();
+
+            // Update Time
+            auto dif = std::chrono::duration_cast<std::chrono::microseconds>(end - beg);
+            counter[i][2] += (dif.count() / ((double)NUM_AVG));
 
             // Generate Random ComplexArray of Size n for Large Element Range
             makeComplexArray(data_large, n, HIGH_RANGE);
 
             // Reset Count
             count = 0;
+
+            // Run FFT and Time the Process
+            beg = std::chrono::high_resolution_clock::now();
             counter[i][1] += (fftCount(data_large, n, out_large) / ((double)NUM_AVG));
+            end = std::chrono::high_resolution_clock::now();
+
+            // Update Time
+            dif = std::chrono::duration_cast<std::chrono::microseconds>(end - beg);
+            counter[i][3] += (dif.count() / ((double)NUM_AVG));
         }
 
         // Double Number of Input Elements for Next Run
@@ -126,14 +145,14 @@ int main() {
     FILE *fp = fopen("fftOutput.csv","w");
     if(fp != NULL){
         // Print Header
-        printf("%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
-        fprintf(fp,"%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
-        printf("-------------------- -------------------- --------------------\n");
+        printf("%-20s %-20s %-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768", "FFT-1024 us", "FFT-32768 us");
+        fprintf(fp,"%-20s,%-20s,%-20s,%-20s,%-20s\n", "n", "FFT-1024", "FFT-32768", "FFT-1024 us", "FFT-32768 us");
+        printf("-------------------- -------------------- -------------------- -------------------- --------------------\n");
 
         // Print out Averaged Counts
         for(j = 0; j < i; j++){
-            printf("%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1]);
-            fprintf(fp, "%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1]);
+            printf("%-20d,%-20d,%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1], (int) counter[j][2], (int) counter[j][3]);
+            fprintf(fp, "%-20d,%-20d,%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1], (int) counter[j][2], (int) counter[j][3]);
 
             // Double the n Value
             n *= 2;
