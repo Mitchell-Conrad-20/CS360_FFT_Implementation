@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/Exam03Print.dir/FFT.cpp.o  -o ../bin/Exam03Print 

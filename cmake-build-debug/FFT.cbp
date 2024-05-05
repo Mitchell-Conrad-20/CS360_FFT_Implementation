@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="Exam03Print_Sp24"/>
+		<Option title="FFT"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Exam03Print">
-				<Option output="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin/Exam03Print" prefix_auto="0" extension_auto="0"/>
+			<Target title="FFT">
+				<Option output="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin/FFT" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -53,14 +53,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 Exam03Print"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 FFT"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Exam03Print/fast">
-				<Option output="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin/Exam03Print" prefix_auto="0" extension_auto="0"/>
+			<Target title="FFT/fast">
+				<Option output="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin/FFT" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/bin"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -75,7 +75,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 Exam03Print/fast"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 FFT/fast"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/Mitch/Documents/Schoolwork/CS\ 360/CS360_FFT_Implementation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,10 +83,10 @@
 			</Target>
 		</Build>
 		<Unit filename="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/FFT.cpp">
-			<Option target="Exam03Print"/>
+			<Option target="FFT"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/Utilities.h">
-			<Option target="Exam03Print"/>
+			<Option target="FFT"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

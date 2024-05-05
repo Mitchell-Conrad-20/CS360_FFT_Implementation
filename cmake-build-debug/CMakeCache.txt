@@ -156,7 +156,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Exam03Print_Sp24
+CMAKE_PROJECT_NAME:STATIC=FFT
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -225,6 +225,12 @@ Exam03Print_Sp24_BINARY_DIR:STATIC=/mnt/c/Users/Mitch/Documents/Schoolwork/CS 36
 
 //Value Computed by CMake
 Exam03Print_Sp24_SOURCE_DIR:STATIC=/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation
+
+//Value Computed by CMake
+FFT_BINARY_DIR:STATIC=/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/cmake-build-debug
+
+//Value Computed by CMake
+FFT_SOURCE_DIR:STATIC=/mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation
 
 //Path to a program.
 ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc

@@ -1,2 +1,2 @@
-# CS360_FFT_Implementation
+# CS360 FFT Implementation
  Recursive FFT Implementation Based On CLRS
