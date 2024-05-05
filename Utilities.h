@@ -48,7 +48,7 @@ void printArray(int A[], int n){
 void printComplexArray(ComplexArray &a, int n){
     for (int i = 0; i < n; i++){
         //cout << a[i] << endl; // Format: (a, b)
-        printf("%f + i%f\n", real(a[i]), imag(a[i])); // Format: a + bi
+        printf("%f + %fi\n", real(a[i]), imag(a[i])); // Format: a + bi
     }
     printf("\n");
 }
