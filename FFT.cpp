@@ -15,14 +15,59 @@
 #define LOW_RANGE 1024			// Maximum value for small input range
 #define MAX_RUNS 13             // Maximum number of 2^i input sizes to run
 
-using namespace::std;
+//using namespace::std;
 
 // Define Complex Types
-typedef complex<double> Complex;
-typedef valarray<Complex> ComplexArray;
+typedef std::complex<double> Complex;
+typedef std::valarray<Complex> ComplexArray;
 
 // Define Constants
 const float PI = 3.14159265;
+
+// Define Count Variable
+int count;
+
+// Define Function Prototypes
+void fft(ComplexArray& a, int n, ComplexArray& y);
+int fftCount(ComplexArray& a, int n, ComplexArray& y);
+
+// Generate Counts for Asymptotic Analysis of FFT at
+// For Various Datasets with Averaging
+int main() {
+    // TODO: Implement Averaging of FFT Counts for Various Datasets
+
+    // Set the Seed for Random Numbers
+    srand(0);
+
+    // Initialize the Count
+    count = 0;
+
+    // Set the Size of the Complex Array
+    int n = 8;
+
+    // Create Complex Array to Store Data
+    ComplexArray data;
+
+    // Make the Complex Array with Random Data
+    makeComplexArray(data, n, LOW_RANGE);
+
+    // Print Input
+    printRealPartOfComplexArray(data, n);
+
+    // Init Output Array
+    ComplexArray out(n);
+
+    // Execute FFT
+    fftCount(data, n, out);
+
+    // Print Results
+    printComplexArray(out, n);
+
+    // Print the Count
+    printf("Count: %d", count);
+
+    return 0;
+}
 
 // Recursive Fast-Fourier Transform (Based on CLRS)
 void fft(ComplexArray& a, int n, ComplexArray& y){
@@ -32,8 +77,8 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
     }
 
     // Use Slice to Generate Evens/Odds
-    ComplexArray a_even = a[slice(0, n / 2, 2)];
-    ComplexArray a_odd = a[slice(1, n / 2, 2)];
+    ComplexArray a_even = a[std::slice(0, n / 2, 2)];
+    ComplexArray a_odd = a[std::slice(1, n / 2, 2)];
 
     // Even Recursive Call
     ComplexArray y_even(n / 2);
@@ -45,7 +90,7 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
 
     // Calculations
     for(int k = 0; k < n / 2; k++){
-        Complex omega = polar(1.0, -2.0 * PI * k / n);
+        Complex omega = std::polar(1.0, -2.0 * PI * k / n);
         y[k] = y_even[k] + omega * y_odd[k];
         y[k + (n / 2)] = y_even[k] - omega * y_odd[k];
     }
@@ -53,30 +98,57 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
     // No Return Statement Since Output is Passed in
 }
 
-// Run Main & Test FFT
-int main() {
-    // TODO: Implement Averaging of FFT for Various Datasets
+// Recursive Fast-Fourier Transform
+// Incrementing Count for Each Line of Pseudocode in CLRS
+// Returns the Count
+int fftCount(ComplexArray& a, int n, ComplexArray& y){
+    if(n == 1){
+        count++;
 
-    // Init Complex Array With Data
-    int n = 8;
-    //const Complex test[] = { 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0 };
-    //ComplexArray data(test, n);
+        y = a;
 
-    ComplexArray data;
+        // Return the Count
+        return count;
+    }
+    count++;
 
-    makeComplexArray(data, n, LOW_RANGE);
+    // Add Counts for the two Omega Calculations That I Moved
+    count++;
+    count++;
 
-    // Print Input
-    printRealPartOfComplexArray(data, n);
+    // Use Slice to Generate Evens
+    ComplexArray a_even = a[std::slice(0, n / 2, 2)];
+    count++;
 
-    // Init Output Array
-    ComplexArray out(n);
+    // Use Slice to Generate Odds
+    ComplexArray a_odd = a[std::slice(1, n / 2, 2)];
+    count++;
 
-    // Execute FFT
-    fft(data, n, out);
+    // Even Recursive Call
+    ComplexArray y_even(n / 2);
+    fft(a_even, n / 2, y_even);
+    count++;
 
-    // Print Results
-    printComplexArray(out, n);
+    // Odd Recursive Call
+    ComplexArray y_odd(n / 2);
+    fft(a_odd, n / 2, y_odd);
+    count++;
 
-    return 0;
+    // Calculations
+    for(int k = 0; k < n / 2; k++){
+        Complex omega = std::polar(1.0, -2.0 * PI * k / n);
+
+        y[k] = y_even[k] + omega * y_odd[k];
+        count++;
+
+        y[k + (n / 2)] = y_even[k] - omega * y_odd[k];
+        count++;
+
+        // Count for Omega Calculation That is Moved
+        count++;
+    }
+    count++;
+
+    // Return the Count
+    return count;
 }

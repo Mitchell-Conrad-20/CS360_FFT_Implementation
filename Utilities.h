@@ -8,11 +8,11 @@
 #include <complex>
 
 // Set Standard Namespace
-using namespace::std;
+//using namespace::std;
 
 // Define Complex Types
-typedef complex<double> Complex;
-typedef valarray<Complex> ComplexArray;
+typedef std::complex<double> Complex;
+typedef std::valarray<Complex> ComplexArray;
 
 // Utility Function to Create a Random ComplexArray of Length n
 void makeComplexArray(ComplexArray &a, int n, int range){
