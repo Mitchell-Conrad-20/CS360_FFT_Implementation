@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <complex>
 #include <valarray>
-#include <iostream>
 #include "Utilities.h"
 
 // Definitions
@@ -14,8 +13,6 @@
 #define HIGH_RANGE 32768        // Maximum value for large input range
 #define LOW_RANGE 1024			// Maximum value for small input range
 #define MAX_RUNS 13             // Maximum number of 2^i input sizes to run
-
-//using namespace::std;
 
 // Define Complex Types
 typedef std::complex<double> Complex;
@@ -34,43 +31,118 @@ int fftCount(ComplexArray& a, int n, ComplexArray& y);
 // Generate Counts for Asymptotic Analysis of FFT at
 // For Various Datasets with Averaging
 int main() {
-    // TODO: Implement Averaging of FFT Counts for Various Datasets
+    // Test FFT
+    Complex test[] = { 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0 };
+    ComplexArray test_data(test, 8), test_out(8);
+
+    // Run FFT - The Two Implementations Should Be Identical
+    // Only Difference Should be Calculating a Count
+    fftCount(test_data, 8, test_out);
+    //fft(test_data, 8, test_out);
+
+    // Set the Solution to Test
+    double solution[8][2] = { {4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421} };
+
+    // Check the Output Against the Solution
+    for(int m = 0; m < 8; m++){
+        // Get the Absolute Value of Difference Between Output and Solution
+        double delta_real = abs(real(test_out[m]) - solution[m][0]);
+        double delta_imag = abs(imag(test_out[m]) - solution[m][1]);
+
+        // Check if Solution Matches (Small Error is Allowed Since Using Floating-Point Math)
+        if(delta_real > 0.01 || delta_imag > 0.01){
+            printf("Test Failed!\n");
+
+            // Print Input
+            printf("FFT Input\n");
+            printRealPartOfComplexArray(test_data, 8);
+
+            // Print Output
+            printf("FFT Output\n");
+            printComplexArray(test_out, 8);
+
+            // Print Solution
+            printf("FFT Solution\n");
+            printSolution(solution);
+
+            // Return Exit Code 1
+            return 1;
+        }
+    }
 
     // Set the Seed for Random Numbers
     srand(0);
 
-    // Initialize the Count
-    count = 0;
+    // Define Vars
+    int n, i, j;
 
-    // Set the Size of the Complex Array
-    int n = 8;
+    // Define Counter to Store Average Counts for Each Run
+    double counter[MAX_RUNS][2];
 
-    // Create Complex Array to Store Data
-    ComplexArray data;
+    // Initialize Counters
+    for (i=0; i<MAX_RUNS; i++){
+        counter[i][0] = 0.0;
+        counter[i][1] = 0.0;
+    }
 
-    // Make the Complex Array with Random Data
-    makeComplexArray(data, n, LOW_RANGE);
+    // Set Starting Number of Elements
+    n = 16;
 
-    // Print Input
-    printRealPartOfComplexArray(data, n);
+    // Initial Iteration Count
+    i = 0;
 
-    // Init Output Array
-    ComplexArray out(n);
+    while ((n <= MAX_ELEMENTS) && (i < MAX_RUNS)){
+        // Loop with random input arrays of fixed size to average results
+        for (j = 0; j < NUM_AVG; j++){
+            // Define Complex Arrays
+            ComplexArray data(n), data_large(n), out(n), out_large(n);
 
-    // Execute FFT
-    fftCount(data, n, out);
+            // Generate Random ComplexArray of Size n for Small Element Range
+            makeComplexArray(data, n, LOW_RANGE);
 
-    // Print Results
-    printComplexArray(out, n);
+            // Reset Count
+            count = 0;
+            counter[i][0] += (fftCount(data, n, out) / ((double)NUM_AVG));
 
-    // Print the Count
-    printf("Count: %d", count);
+            // Generate Random ComplexArray of Size n for Large Element Range
+            makeComplexArray(data_large, n, HIGH_RANGE);
+
+            // Reset Count
+            count = 0;
+            counter[i][1] += (fftCount(data_large, n, out_large) / ((double)NUM_AVG));
+        }
+
+        // Double Number of Input Elements for Next Run
+        n *= 2;
+
+        // Increment the Iteration Count
+        i++;
+    }
+
+    // Reset n to Starting Value
+    n = 16;
+
+    // Print Header
+    printf("%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
+    printf("-------------------- -------------------- --------------------\n");
+
+    // Print out Averaged Counts
+    for (j = 0; j < i; j++)
+    {
+        printf("%-20d,", n);
+        printf("%-20d,%-20d", (int)counter[j][0], (int)counter[j][1]);
+        printf("\n");
+
+        // Double the n Value
+        n *= 2;
+    }
 
     return 0;
 }
 
 // Recursive Fast-Fourier Transform (Based on CLRS)
-void fft(ComplexArray& a, int n, ComplexArray& y){
+// Note That Input Array, a, Only Has Real Dimension
+void fft(ComplexArray &a, int n, ComplexArray &y){
     if(n == 1){
         y = a;
         return;
@@ -101,7 +173,7 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
 // Recursive Fast-Fourier Transform
 // Incrementing Count for Each Line of Pseudocode in CLRS
 // Returns the Count
-int fftCount(ComplexArray& a, int n, ComplexArray& y){
+int fftCount(ComplexArray &a, int n, ComplexArray &y){
     if(n == 1){
         count++;
 

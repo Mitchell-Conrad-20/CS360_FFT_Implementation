@@ -28,7 +28,7 @@ void makeComplexArray(ComplexArray &a, int n, int range){
 // Utility Function to Print ComplexArray
 void printComplexArray(ComplexArray &a, int n){
     for (int i = 0; i < n; i++){
-        //cout << a[i] << endl; // Format: (a, b)
+        //std::cout << a[i] << std::endl; // Format: (a, b)
         printf("%f + %fi\n", real(a[i]), imag(a[i])); // Format: a + bi
     }
     printf("\n");
@@ -38,6 +38,13 @@ void printComplexArray(ComplexArray &a, int n){
 void printRealPartOfComplexArray(ComplexArray &a, int n){
     for (int i = 0; i < n; i++){
         printf("%f\n", real(a[i]));
+    }
+    printf("\n");
+}
+
+void printSolution(double a[8][2]){
+    for (int i = 0; i < 8; i++){
+        printf("%f + %fi\n", a[i][0], a[i][1]); // Format: a + bi
     }
     printf("\n");
 }
