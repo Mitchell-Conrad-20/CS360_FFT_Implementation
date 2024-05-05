@@ -47,8 +47,8 @@ int main() {
     // Check the Output Against the Solution
     for(int m = 0; m < 8; m++){
         // Get the Absolute Value of Difference Between Output and Solution
-        double delta_real = abs(real(test_out[m]) - solution[m][0]);
-        double delta_imag = abs(imag(test_out[m]) - solution[m][1]);
+        double delta_real = std::abs(real(test_out[m]) - solution[m][0]);
+        double delta_imag = std::abs(imag(test_out[m]) - solution[m][1]);
 
         // Check if Solution Matches (Small Error is Allowed Since Using Floating-Point Math)
         if(delta_real > 0.01 || delta_imag > 0.01){
@@ -113,7 +113,7 @@ int main() {
 
             // Update Time
             auto dif = std::chrono::duration_cast<std::chrono::microseconds>(end - beg);
-            counter[i][2] += (dif.count() / ((double)NUM_AVG));
+            counter[i][2] += ((double)dif.count() / ((double)NUM_AVG));
 
             // Generate Random ComplexArray of Size n for Large Element Range
             makeComplexArray(data_large, n, HIGH_RANGE);
@@ -128,7 +128,7 @@ int main() {
 
             // Update Time
             dif = std::chrono::duration_cast<std::chrono::microseconds>(end - beg);
-            counter[i][3] += (dif.count() / ((double)NUM_AVG));
+            counter[i][3] += ((double)dif.count() / ((double)NUM_AVG));
         }
 
         // Double Number of Input Elements for Next Run
@@ -143,7 +143,7 @@ int main() {
 
     // Print the Counts to CSV and Terminal
     FILE *fp = fopen("fftOutput.csv","w");
-    if(fp != NULL){
+    if(fp != nullptr){
         // Print Header
         printf("%-20s %-20s %-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768", "FFT-1024 us", "FFT-32768 us");
         fprintf(fp,"%-20s,%-20s,%-20s,%-20s,%-20s\n", "n", "FFT-1024", "FFT-32768", "FFT-1024 us", "FFT-32768 us");
