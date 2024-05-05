@@ -45,6 +45,15 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
 
     // No Return Statement Since Output is Passed in
 }
+/* Utility function to print ComplexArray */
+//void printComplexArray(ComplexArray &a, int n){
+//    for (int i = 0; i < n; i++){
+////        cout << a[i] << endl;
+////        printf("%i ", A[i]);
+//        printf("%f + i%f\n", real(a[i]), imag(a[i]));
+//    }
+//    printf("\n");
+//}
 
 // Run Main & Test FFT
 int main() {
@@ -64,8 +73,11 @@ int main() {
     // Print Results
     for (int i = 0; i < 8; i++)
     {
-        cout << out[i] << endl;
+//        cout << out[i] << endl;
+//        printf("%f + %fi\n", real(out[i]), imag(out[i]));
     }
+
+    printComplexArray(out, 8);
 
     return 0;
 }
