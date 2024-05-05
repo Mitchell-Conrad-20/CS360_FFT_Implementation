@@ -8,6 +8,13 @@
 #include <iostream>
 #include "Utilities.h"
 
+// Definitions
+#define NUM_AVG 10              // Number of sorting runs to average
+#define MAX_ELEMENTS 65537      // Maximum number of elements in input array
+#define HIGH_RANGE 32768        // Maximum value for large input range
+#define LOW_RANGE 1024			// Maximum value for small input range
+#define MAX_RUNS 13             // Maximum number of 2^i input sizes to run
+
 using namespace::std;
 
 // Define Complex Types
@@ -49,20 +56,27 @@ void fft(ComplexArray& a, int n, ComplexArray& y){
 // Run Main & Test FFT
 int main() {
     // TODO: Implement Averaging of FFT for Various Datasets
-    // Init Complex Array With Data
 
-    // note that this can just be a regular array
-    const Complex test[] = { 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0 };
-    ComplexArray data(test, 8);
+    // Init Complex Array With Data
+    int n = 8;
+    //const Complex test[] = { 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0 };
+    //ComplexArray data(test, n);
+
+    ComplexArray data;
+
+    makeComplexArray(data, n, LOW_RANGE);
+
+    // Print Input
+    printRealPartOfComplexArray(data, n);
 
     // Init Output Array
-    ComplexArray out(8);
+    ComplexArray out(n);
 
     // Execute FFT
-    fft(data, 8, out);
+    fft(data, n, out);
 
     // Print Results
-    printComplexArray(out, 8);
+    printComplexArray(out, n);
 
     return 0;
 }
