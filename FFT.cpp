@@ -80,7 +80,7 @@ int main() {
     double counter[MAX_RUNS][2];
 
     // Initialize Counters
-    for (i=0; i<MAX_RUNS; i++){
+    for(i=0; i<MAX_RUNS; i++){
         counter[i][0] = 0.0;
         counter[i][1] = 0.0;
     }
@@ -91,9 +91,9 @@ int main() {
     // Initial Iteration Count
     i = 0;
 
-    while ((n <= MAX_ELEMENTS) && (i < MAX_RUNS)){
+    while((n <= MAX_ELEMENTS) && (i < MAX_RUNS)){
         // Loop with random input arrays of fixed size to average results
-        for (j = 0; j < NUM_AVG; j++){
+        for(j = 0; j < NUM_AVG; j++){
             // Define Complex Arrays
             ComplexArray data(n), data_large(n), out(n), out_large(n);
 
@@ -122,19 +122,26 @@ int main() {
     // Reset n to Starting Value
     n = 16;
 
-    // Print Header
-    printf("%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
-    printf("-------------------- -------------------- --------------------\n");
+    // Print the Counts to CSV and Terminal
+    FILE *fp = fopen("fftOutput.csv","w");
+    if(fp != NULL){
+        // Print Header
+        printf("%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
+        fprintf(fp,"%-20s %-20s %-20s\n", "n", "FFT-1024", "FFT-32768");
+        printf("-------------------- -------------------- --------------------\n");
 
-    // Print out Averaged Counts
-    for (j = 0; j < i; j++)
-    {
-        printf("%-20d,", n);
-        printf("%-20d,%-20d", (int)counter[j][0], (int)counter[j][1]);
-        printf("\n");
+        // Print out Averaged Counts
+        for(j = 0; j < i; j++){
+            printf("%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1]);
+            fprintf(fp, "%-20d,%-20d,%-20d\n", n, (int) counter[j][0], (int) counter[j][1]);
 
-        // Double the n Value
-        n *= 2;
+            // Double the n Value
+            n *= 2;
+        }
+    }
+    else{
+        printf("Unable to open output file! Make sure it is not open in another application.\n");
+        return 1;
     }
 
     return 0;
