@@ -2,13 +2,10 @@
 // Spring 2024
 // Mitchell Conrad
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <iostream>
 #include <complex>
-
-// Set Standard Namespace
-//using namespace::std;
 
 // Define Complex Types
 typedef std::complex<double> Complex;

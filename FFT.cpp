@@ -2,7 +2,7 @@
 // Spring 2024
 // Mitchell Conrad
 
-#include <stdio.h>
+#include <cstdio>
 #include <complex>
 #include <valarray>
 #include "Utilities.h"

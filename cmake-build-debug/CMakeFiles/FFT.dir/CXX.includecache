@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 /mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/FFT.cpp
-stdio.h
+cstdio
 -
 complex
 -
@@ -17,9 +17,9 @@ Utilities.h
 /mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/Utilities.h
 
 /mnt/c/Users/Mitch/Documents/Schoolwork/CS 360/CS360_FFT_Implementation/Utilities.h
-stdlib.h
+cstdlib
 -
-stdio.h
+cstdio
 -
 iostream
 -
