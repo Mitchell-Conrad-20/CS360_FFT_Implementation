@@ -26,8 +26,10 @@ const float PI = 3.14159265;
 int count;
 
 // Define Function Prototypes
-void fft(ComplexArray& a, int n, ComplexArray& y);
+void fft(ComplexArray &a, int n, ComplexArray &y);
 int fftCount(ComplexArray& a, int n, ComplexArray& y);
+void makeEvenCount(ComplexArray& a, int n, ComplexArray& y);
+void makeOddCount(ComplexArray& a, int n, ComplexArray& y);
 
 // Generate Counts for Asymptotic Analysis of FFT at
 // For Various Datasets with Averaging
@@ -217,19 +219,21 @@ int fftCount(ComplexArray &a, int n, ComplexArray &y){
     // Use Slice to Generate Evens
     ComplexArray a_even = a[std::slice(0, n / 2, 2)];
     count++;
+    count += n / 2;
 
     // Use Slice to Generate Odds
     ComplexArray a_odd = a[std::slice(1, n / 2, 2)];
     count++;
+    count += n / 2;
 
     // Even Recursive Call
     ComplexArray y_even(n / 2);
-    fft(a_even, n / 2, y_even);
+    fftCount(a_even, n / 2, y_even);
     count++;
 
     // Odd Recursive Call
     ComplexArray y_odd(n / 2);
-    fft(a_odd, n / 2, y_odd);
+    fftCount(a_odd, n / 2, y_odd);
     count++;
 
     // Calculations
