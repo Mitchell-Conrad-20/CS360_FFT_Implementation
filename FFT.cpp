@@ -28,8 +28,6 @@ int count;
 // Define Function Prototypes
 void fft(ComplexArray &a, int n, ComplexArray &y);
 int fftCount(ComplexArray& a, int n, ComplexArray& y);
-void makeEvenCount(ComplexArray& a, int n, ComplexArray& y);
-void makeOddCount(ComplexArray& a, int n, ComplexArray& y);
 
 // Generate Counts for Asymptotic Analysis of FFT at
 // For Various Datasets with Averaging
